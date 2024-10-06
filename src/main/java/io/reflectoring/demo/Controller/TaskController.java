@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Component
 @RequestMapping("/taskapi")
 public class TaskController {
     private UserRepo userRepo;
