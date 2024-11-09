@@ -21,14 +21,14 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int userId;
 
-    @JsonProperty("user_name")
+    @Column(name="user_name")
     @NonNull
     String name;
 
     @NonNull
     String password;
 
-    @JsonProperty("email_id")
+    @Column(name="email_id")
     @NonNull
     String emailId;
 

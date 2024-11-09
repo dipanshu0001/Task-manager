@@ -15,19 +15,19 @@ public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("task_id")
+    @Column(name="task_id")
     int id;
 
 //    @NonNull
-    @JsonProperty("task_title")
+    @Column(name="task_title")
     String title;
 
 //    @NonNull
-    @JsonProperty("task_description")
+    @Column(name="task_description")
     String Description;
 
 //    @NonNull
-    @JsonProperty("task_due_date")
+    @Column(name="task_due_date")
     LocalDate dueDate=LocalDate.now();
 
     @ManyToOne

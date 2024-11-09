@@ -5,8 +5,10 @@ import io.reflectoring.demo.Dtos.UserDto;
 import io.reflectoring.demo.Entity.TaskEntity;
 import io.reflectoring.demo.Entity.UserEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",nullValuePropertyMappingStrategy= NullValuePropertyMappingStrategy.IGNORE)
 public interface TaskMapper {
 
     public TaskDto toTaskDto(TaskEntity taskEntity);
@@ -16,4 +18,6 @@ public interface TaskMapper {
 
     // Add the mapping method for UserDto to UserEntity if needed
     UserEntity map(UserDto userDto);
+
+    void updateTaskFromDto(TaskDto taskDto, @MappingTarget TaskEntity taskEntity);
 }
