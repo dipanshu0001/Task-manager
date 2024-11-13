@@ -1,7 +1,9 @@
 package io.reflectoring.demo.Service.Impl;
 
 import io.reflectoring.demo.Dtos.UserDto;
+import io.reflectoring.demo.Entity.UserEntity;
 import io.reflectoring.demo.Entity.UserPrinciple;
+import io.reflectoring.demo.Repositories.UserRepo;
 import io.reflectoring.demo.Service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +19,7 @@ import java.util.Optional;
 @Slf4j
 public class CustomeUserDetailService implements UserDetailsService {
 
-    private final IUserService userService;
+    private final UserRepo userRepo;
     /**
      * @param username the username identifying the user whose data is required.
      * @return
@@ -25,7 +27,7 @@ public class CustomeUserDetailService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        Optional<UserDto> userDtoOptional=userService.getByUserName(username);
+        Optional<UserEntity> userDtoOptional=userRepo.findByName(username);
         if(userDtoOptional.isEmpty())throw new UsernameNotFoundException("User name Not found");
         return new UserPrinciple(userDtoOptional.get());
     }

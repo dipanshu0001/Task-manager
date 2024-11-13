@@ -7,10 +7,12 @@ import io.reflectoring.demo.Repositories.UserRepo;
 import io.reflectoring.demo.Service.IUserService;
 import io.reflectoring.demo.Service.JWTService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +21,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService {
-    private final UserRepo userRepo;
-    private final UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
-    private final JWTService jwtService;
+    private final  UserRepo userRepo;
+    private final  UserMapper userMapper;
+    private final  AuthenticationManager authenticationManager;
+    private final  JWTService jwtService;
+
+
 
 
     /**
@@ -44,7 +47,7 @@ public class UserService implements IUserService {
     @Override
     public boolean registerUser(UserDto userDto) {
         final UserEntity userEntity=userMapper.toUserEntity(userDto);
-        userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userEntity.setPassword(new BCryptPasswordEncoder(12).encode(userDto.getPassword()));
         try {
             userRepo.save(userEntity);
             return true;

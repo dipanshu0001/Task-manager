@@ -9,8 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class UserController  {
     private final IUserService userService;
@@ -21,8 +22,8 @@ public class UserController  {
         return userService.registerUser(userDto);
     }
     @PostMapping(value="/login")
-    public String loginUser(@Valid @NotNull @RequestParam("email") String email,@Valid @NotNull @RequestParam("password") String password){
-        final UserDto userDto=new UserDto().setPassword(password).setEmailId(email);
+    public String loginUser(@Valid @NotNull @RequestParam("user_name") String name,@Valid @NotNull @RequestParam("email") String email,@Valid @NotNull @RequestParam("password") String password){
+        final UserDto userDto=new UserDto().setPassword(password).setEmailId(email).setName(name);
         return userService.loginUser(userDto);
     }
 }

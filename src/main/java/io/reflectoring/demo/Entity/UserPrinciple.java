@@ -14,7 +14,7 @@ public class UserPrinciple implements UserDetails {
     /**
      * @return
      */
-    private UserDto user;
+    private UserEntity user;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("USER"));
